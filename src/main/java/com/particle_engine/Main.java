@@ -10,12 +10,32 @@ import processing.core.*;
 
 public class Main extends PApplet {
 
-//sets up processing and prints the hello world message to the console
+    Bubbles bubbles; //draws the simulation to the screen
+
+//sets up processing
     public static void main(String[] args) {
         PApplet.main("com.particle_engine.Main");
     }
 
+//sets up the size of the window
     public void settings() {
         size (700,500);
+    }
+
+//Settings up the Bubbles class
+    public void setup() {
+      
+    }
+
+//draws everything on the screen
+    public void draw() {
+        background(49, 72, 185); //resets the background every frame
+        noStroke(); //takes away the outlines around the shapes
+        bubbles.draw();
+    }
+
+//TBD -- gonna do something with some particles
+    public void mousePressed() {
+        
     }
 }
