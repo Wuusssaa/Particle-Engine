@@ -12,11 +12,11 @@ import processing.core.*;
 public class Bubble {
     PApplet main; //the main class -- provides all the functionality of processing 
 
-    float x, y; //location of the ball
-    float yVel = 1; //how fast the ball moves
-    float y_direction = 1; //which direction the ball goes, 1 is down -- adding & -1 is up -- subtracting
+    float x, y; //location of the bubble
+    float yVel = 1; //how fast the bubble moves
+    float y_direction = 1; //which direction the bubble goes, 1 is down -- adding & -1 is up -- subtracting
 
-    float radius; //how big the ball is
+    float radius; //how big the bubble is
     int bubbleColor;
 
     Bubble(float x_, float y_, float radius_, PApplet main_, int c) {

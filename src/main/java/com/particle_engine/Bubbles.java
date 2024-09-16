@@ -12,32 +12,45 @@ import processing.core.*;
 
 public class Bubbles {
     PApplet main; //the main class -- provides all the functionality of processing 
-    ArrayList<Bubble> bubbles;
+    ArrayList<Bubble> bubbles; //all the bubbles being drawn
 
-    Bubble bubbles_; //a bubble that will be drawn to the screen
+    Bubble bubble; //a bubble that will be drawn to the screen
+    int bubbleCount = 50; //# of bubbles
 
-    Bubbles(PApplet main_) 
-    {
+    Bubbles(PApplet main_) {
         main = main_;
-        bubbles = new ArrayList<Bubble>();
+        bubbles = new ArrayList<>();
+        init(); //initialize the bubbles
     }
 
-//setup everything you need for the particle engine
-    void setup() {
-        bubbles_ = new Bubble(main.width/2.0f, main.height*.10f, 12.f, main, main.color(main.random(255), main.random(255), main.random(255))); //Had to make everything floats by addingg f at the end of the hard-coded numbers.
+//adds all the fish to the array. All attributes are random. 
+    void init() {
+        for(int i=0; i<bubbleCount; i++) {
+            bubble = new Bubble(main.random(main.width), main.random(main.height), main.random(30), main, main.color(main.random(255), main.random(255), main.random(255))); //Had to make everything floats by addingg f at the end of the hard-coded numbers.
+            bubbles.add(bubble);
+        }
     }
 
 //draws the bubbles
     void draw() {
         main.background(49, 72, 185); //resets the background every frame
         main.noStroke(); //takes away the outlines around the shapes
-        bubbles_.draw();
+        for(int i = 0; i<bubbles.size(); i++){
+            bubbles.get(i).draw(); 
+        }
     }
 
-//clicking the mouse speeds up the bouncing ball
+//clicking the mouse speeds up the bouncing bubbles
     void mousePressed() {
-        bubbles_.faster();
+        for(int i = 0; i<bubbles.size(); i++){
+            bubbles.get(i).faster(); 
+        }
     }
 
+    void keyPressed() {
+        if(main.key == ' ') {
+            bubbleCount = 50;
+        }
+    }
 
 }
