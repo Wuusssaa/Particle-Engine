@@ -2,7 +2,7 @@
  * Coder: Vanessa Haynes
  * Project: Project 1 - Particle Engine
  * Date: Sep. 2024
- * Description: Fish -- creates "fish" bouncing left and right.
+ * Description: Fish -- Class that creates "fish" bouncing left and right.
  */
 
 package com.particle_engine;
@@ -11,10 +11,10 @@ import processing.core.*;
 
 public class Fish {
     float x, y; //location
-    float sizeX; //size of fish
-    float sizeY; //size of fish
-    float color; //color of fish
-    float xVel = 1; //how fast the fish moves
+    float sizeX; //size of fish length
+    float sizeY; //size of fish height
+    int color; //color of fish
+    float xVel = 3; //how fast the fish move
     float x_direction = 1; //which direction the fish goes, 1 is right -- adding & -1 is left -- subtracting
 
     PApplet main; //main class that gives processing functionality
@@ -29,15 +29,19 @@ public class Fish {
         main = main_;
     }
 
+//draws out the fish
     void draw() {
         main.fill (color);
         main.rect (x, y, sizeX, sizeY);
         move();
     }
 
+//making the fish move
     void move() {
-        x += xVel*x_direction;
 
+        x += xVel*x_direction; //moves the fish
+
+        //keeps the fish from leaving the screen- boounces them
         if((x+sizeX) >= main.width){
             x_direction = -1;
         } else if (x <= 0) {
@@ -45,8 +49,18 @@ public class Fish {
         }
     }
 
+//changes the direction of the fish
+    void flip() {
+        x_direction *= -1;
+    }
+
+//speeds up fish
     void faster() {
         xVel++;
     }
 
+//slows down fish
+    void slower() {
+        xVel--;
+    }
 }

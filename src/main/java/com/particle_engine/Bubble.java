@@ -2,7 +2,7 @@
  * Coder: Vanessa Haynes
  * Project: Project 1 - Particle Engine
  * Date: Sep. 2024
- * Description: Bubble -- creates bubbles bouncing up and down.
+ * Description: Bubble -- Class that creates bubbles bouncing up and down.
  */
 
 package com.particle_engine;
@@ -10,14 +10,13 @@ package com.particle_engine;
 import processing.core.*;
 
 public class Bubble {
-    PApplet main; //the main class -- provides all the functionality of processing 
+    PApplet main; //provides all the functionality of processing 
 
     float x, y; //location of the bubble
-    float yVel = 1; //how fast the bubble moves
+    float yVel = 3; //how fast the bubble moves
     float y_direction = 1; //which direction the bubble goes, 1 is down -- adding & -1 is up -- subtracting
-
-    float radius; //how big the bubble is
-    int bubbleColor;
+    float radius; //size of bubble
+    int bubbleColor; //color of the bubble
 
     Bubble(float x_, float y_, float radius_, PApplet main_, int c) {
         x = x_;
@@ -28,15 +27,18 @@ public class Bubble {
         main = main_;
     }
 
+//draws out the bubble - will have no fill and only coloring the outline
     void draw() {
-        main.fill(bubbleColor);
+        main.stroke(bubbleColor);
         main.ellipse(x, y, radius, radius); //need to connect to main class to use processing's ellipse function
         move();
     }
 
+//making the bubbles move
     void move() {
-        y += yVel*y_direction;
+        y += yVel*y_direction; //moves the bubble
 
+        //keeps the bubble from leaving the screen- boounces them
         if(y >= main.height){
             y_direction = -1;
         } else if (y <= 0) {
@@ -44,8 +46,13 @@ public class Bubble {
         }
     }
 
+//speeds up bubble
     void faster() {
         yVel++;
     }
 
+//slows down bubble
+    void slower() {
+        yVel--;
+    }
 }

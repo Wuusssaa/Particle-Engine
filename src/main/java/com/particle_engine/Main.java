@@ -10,23 +10,19 @@ import processing.core.*;
 
 public class Main extends PApplet {
 
-    Bubbles bubbles; //draws the simulation to the screen
-    Fishies fishies; 
+    Bubbles bubbles; //draws the bubbles simulation to the screen
+    Fishies fishies; //draws the fish simulation to the screen
 
 //sets up processing
     public static void main(String[] args) {
         PApplet.main("com.particle_engine.Main");
     }
 
-//sets up the size of the window
+//sets up the size of the window 
     public void settings() {
         size (700,500);
         bubbles = new Bubbles(this);
         fishies = new Fishies(this);
-    }
-
-//Settings up the Bubbles class
-    public void setup() {
     }
 
 //draws everything on the screen
@@ -35,14 +31,20 @@ public class Main extends PApplet {
         fishies.draw();
     }
 
-//TBD -- gonna do something with some particles
+//2 out of 3 mouse functions. Clicking in specific mouse locations speed up either the fishes or the bubbles
     public void mousePressed() {
-        bubbles.mousePressed();
         fishies.mousePressed();
+        bubbles.mousePressed();
     }
 
+//final mouse function. Dragging the mouse will change the color of the background between different shades of dark blue
+// (Also plays with the speeds of the particles depending on where it's dragged)
+    public void mouseDragged() {
+        bubbles.mouseDragged();
+    }
+
+//keyboard function. Pressing spacebar flips the direction of the fishes from where they currently are
     public void keyPressed() {
-        bubbles.keyPressed();
         fishies.keyPressed();
     }
 }

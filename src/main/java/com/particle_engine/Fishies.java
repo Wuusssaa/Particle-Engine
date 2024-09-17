@@ -5,7 +5,6 @@
  * Description: Fishies -- Container class for creating all of the "fish".
  */
 
-
 package com.particle_engine;
 
 import java.util.ArrayList;
@@ -15,41 +14,48 @@ public class Fishies {
     PApplet main; //main class that gives processing funtionality
     ArrayList<Fish> fishies; //all the fish being drawn
 
-    Fish fish;
-    int fishCount = 50; //# of fish
+    Fish fish; //fish that will be drawn to the screen
+    int fishCount = 252; //# of fish
 
     Fishies(PApplet main_) {
         main = main_;
         fishies = new ArrayList<>();
-        init(); //initialize the fish
+        init(); //initializing the fish
     }
 
 //adds all the fish to the array. All attributes are random. 
     void init() {
         for(int i=0; i<fishCount; i++) {
-            fish = new Fish(main.random(main.width), main.random(main.height), main.random(30,60), main.random(10,30), main.color(main.random(255), main.random(255), main.random(255)), main);
+            fish = new Fish(main.random(main.width), main.random(main.height), main.random(15,30), main.random(5,15), main.color(main.random(255), main.random(255), main.random(255)), main);
             fishies.add(fish);
         }
     }
 
-
-//draws the fishies
+//draws the fishies with no outlines
     void draw() {
+        main.noStroke(); //takes away the outlines
         for(int i = 0; i<fishies.size(); i++){
             fishies.get(i).draw(); 
         }
     }
 
-//clicking the mouse speeds up the fishies
+//clicking the mouse in specific location alters speed of the fish. Right side = faster. Left side = slower.
     void mousePressed() {
-        for(int i = 0; i<fishies.size(); i++){
-            fishies.get(i).faster(); 
+        if (main.mouseX > main.width/2) {
+            for(int i = 0; i<fishies.size(); i++){
+                fishies.get(i).faster(); 
+            }
+        } else {
+            for(int i = 0; i<fishies.size(); i++){
+                fishies.get(i).slower(); 
+            }
         }
     }
 
+//pressing spacebar flips the direction the fish are swimming in
     void keyPressed() {
-        if(main.key == ' ') {
-            fishCount = 50;
+        for(int i = 0; i<fishies.size(); i++){
+            fishies.get(i).flip(); 
         }
     }
 }
