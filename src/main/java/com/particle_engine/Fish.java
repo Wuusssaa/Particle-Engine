@@ -16,6 +16,7 @@ public class Fish {
     int color; //color of fish
     float xVel = 3; //how fast the fish move
     float x_direction = 1; //which direction the fish goes, 1 is right -- adding & -1 is left -- subtracting
+    boolean swimright;
 
     PApplet main; //main class that gives processing functionality
 
@@ -31,9 +32,18 @@ public class Fish {
 
 //draws out the fish
     void draw() {
-        main.fill (color);
+        if (swimright) {
+            main.fill (color);
         main.rect (x, y, sizeX, sizeY);
+        main.ellipse (x, y+sizeY/2-1, sizeX, sizeY);
         move();
+        } else {
+            main.fill (color);
+        main.rect (x, y, sizeX, sizeY);
+        main.ellipse (x+sizeX, y+sizeY/2-1, sizeX, sizeY);
+        move();
+        }
+        
     }
 
 //making the fish move
@@ -44,8 +54,10 @@ public class Fish {
         //keeps the fish from leaving the screen- boounces them
         if((x+sizeX) >= main.width){
             x_direction = -1;
+            swimright = false;
         } else if (x <= 0) {
             x_direction = 1;
+            swimright = true;
         }
     }
 
